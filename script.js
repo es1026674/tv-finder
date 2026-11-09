@@ -16,10 +16,26 @@ async function loadPopularShows() {
         }
 
         const data = await res.json();
-        console.log(data);
+        fillDropdown(data.results);
 
     } catch (error) {
         console.error(error);
     }
 };
 loadPopularShows();
+
+
+function fillDropdown(shows) {
+showSelect.innerHTML = "";
+const placeholder = document.createElement("option");
+placeholder.value = "";
+placeholder.textContent = "Select a show";
+showSelect.appendChild(placeholder);
+for (const show of shows) {
+    const option = document.createElement("option");
+    option.value = show.id;
+    option.textContent = show.name;
+    showSelect.appendChild(option);
+}
+
+}
